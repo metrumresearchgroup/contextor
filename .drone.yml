@@ -1,0 +1,18 @@
+kind: pipeline
+type: docker
+name: default
+
+clone:
+  depth: 50
+
+steps:
+  - name: test
+    image: golang
+    commands:
+      - go test -v ./...
+
+  - name: lint
+    image: golang:1.18
+    commands:
+      - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.46.2
+      - golangci-lint run

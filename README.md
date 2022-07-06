@@ -29,3 +29,10 @@ func HandlePath(ctx context.Context, apiReq *APIRequest) (apiResp *APIResponse, 
 	return internalHandler(path, APIRequest)
 }
 ```
+
+You can also define the key from an external constant or var:
+
+```go
+// ex: there's a private key type but a public external retrieval key:
+var ExternalValue contextor.New[string](otherpackage.ExternalValueKey)
+```
